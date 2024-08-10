@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
-// import "./CreateNewTodoForm.css";
+import { v4 as uuidv4 } from "uuid";
 
 function CreateNewTodoForm({ onSetIsModal, todoList, onSetToDo }) {
   const [title, setTitle] = useState("");
@@ -10,7 +10,7 @@ function CreateNewTodoForm({ onSetIsModal, todoList, onSetToDo }) {
     const newTodos = [
       ...todoList,
       {
-        id: todoList.length + 1,
+        id: uuidv4(),
         title,
         description,
       },
