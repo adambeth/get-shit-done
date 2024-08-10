@@ -5,11 +5,21 @@ import TodoModal from "./TodoModal";
 import CreateNewTodoForm from "./CreateNewTodoForm";
 
 function App() {
-  const [todos, setTodos] = useState(JSON.parse(localStorage.getItem("todos")));
+  const [todos, setTodos] = useState(() => {
+    const saveTodos = localStorage.getItem("todos");
+    return saveTodos ? JSON.parse(saveTodos) : [];
+  });
   const [isModal, setIsModal] = useState(false);
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
+  useEffect(() => {
+    const todos = JSON.parse(localStorage.getItem("todos"));
+    if (todos) {
+      setTodos(todos);
+    }
+  }, []);
+
   return (
     <>
       {" "}
