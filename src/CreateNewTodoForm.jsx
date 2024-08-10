@@ -40,7 +40,18 @@ function CreateNewTodoForm({ onSetIsModal }) {
           ></textarea>
         </div>
       </div>
-      <button onClick={() => onSetIsModal(false)}>Close</button>
+      <button
+        onClick={() => onSetIsModal(false)}
+        className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded m-2"
+      >
+        Save
+      </button>
+      <button
+        onClick={() => onSetIsModal(false)}
+        className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded m-2"
+      >
+        Close
+      </button>
     </div>
   );
 }
