@@ -5,4 +5,5 @@ import tailwindcss from "tailwindcss";
 export default defineConfig({
   server: { watch: { usePolling: true } },
   plugins: [react({ include: "**/*.jsx" }), tailwindcss()],
+  base: "get-shit-done",
 });
