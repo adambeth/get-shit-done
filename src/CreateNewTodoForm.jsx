@@ -1,8 +1,7 @@
 import PropTypes from "prop-types";
 // import "./CreateNewTodoForm.css";
 
-function CreateNewTodoForm({ todo }) {
-  const { id, title, description } = { ...todo };
+function CreateNewTodoForm({ onSetIsModal }) {
   return (
     <div
       // onClick={onClick}
@@ -21,9 +20,7 @@ function CreateNewTodoForm({ todo }) {
           <input
             id="title"
             className="border-solid border-4 border-orange-500 rounded-lg p-5 w-full"
-          >
-            {title}
-          </input>
+          ></input>
         </div>
       </div>
 
@@ -40,19 +37,27 @@ function CreateNewTodoForm({ todo }) {
           <textarea
             id="details"
             className="border-solid border-4 border-orange-500 rounded-lg p-5 w-full h-34"
-          >
-            {description}
-          </textarea>
+          ></textarea>
         </div>
       </div>
+      <button
+        onClick={() => onSetIsModal(false)}
+        className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded m-2"
+      >
+        Save
+      </button>
+      <button
+        onClick={() => onSetIsModal(false)}
+        className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded m-2"
+      >
+        Close
+      </button>
     </div>
   );
 }
 
 CreateNewTodoForm.propTypes = {
-  todo: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-  }).isRequired,
+  onSetIsModal: PropTypes.func.isRequired,
 };
 
 export default CreateNewTodoForm;
