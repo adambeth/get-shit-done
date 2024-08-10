@@ -15,6 +15,8 @@ function CreateNewTodoForm({ onSetIsModal, todoList, onSetToDo }) {
       },
     ];
     onSetToDo(newTodos);
+    setTitle("");
+    setDescription("");
     onSetIsModal(false);
   }
 
