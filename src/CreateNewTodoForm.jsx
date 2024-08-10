@@ -1,7 +1,12 @@
 import PropTypes from "prop-types";
+import { useState } from "react";
 // import "./CreateNewTodoForm.css";
 
-function CreateNewTodoForm({ onSetIsModal }) {
+function CreateNewTodoForm({ onSetIsModal, todoList, onSetToDo }) {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  function saveTodo() {}
+
   return (
     <div
       // onClick={onClick}
@@ -19,6 +24,8 @@ function CreateNewTodoForm({ onSetIsModal }) {
           {" "}
           <input
             id="title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
             className="border-solid border-4 border-orange-500 rounded-lg p-5 w-full"
           ></input>
         </div>
@@ -36,6 +43,8 @@ function CreateNewTodoForm({ onSetIsModal }) {
           {" "}
           <textarea
             id="details"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
             className="border-solid border-4 border-orange-500 rounded-lg p-5 w-full h-34"
           ></textarea>
         </div>
