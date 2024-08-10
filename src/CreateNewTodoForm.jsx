@@ -1,7 +1,25 @@
 import PropTypes from "prop-types";
+import { useState } from "react";
 // import "./CreateNewTodoForm.css";
 
-function CreateNewTodoForm({ onSetIsModal }) {
+function CreateNewTodoForm({ onSetIsModal, todoList, onSetToDo }) {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  function saveTodo() {
+    const newTodos = [
+      ...todoList,
+      {
+        id: todoList.length + 1,
+        title,
+        description,
+      },
+    ];
+    onSetToDo(newTodos);
+    setTitle("");
+    setDescription("");
+    onSetIsModal(false);
+  }
+
   return (
     <div
       // onClick={onClick}
@@ -19,6 +37,8 @@ function CreateNewTodoForm({ onSetIsModal }) {
           {" "}
           <input
             id="title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
             className="border-solid border-4 border-orange-500 rounded-lg p-5 w-full"
           ></input>
         </div>
@@ -36,12 +56,14 @@ function CreateNewTodoForm({ onSetIsModal }) {
           {" "}
           <textarea
             id="details"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
             className="border-solid border-4 border-orange-500 rounded-lg p-5 w-full h-34"
           ></textarea>
         </div>
       </div>
       <button
-        onClick={() => onSetIsModal(false)}
+        onClick={saveTodo}
         className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded m-2"
       >
         Save
