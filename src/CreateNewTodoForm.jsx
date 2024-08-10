@@ -5,7 +5,18 @@ import { useState } from "react";
 function CreateNewTodoForm({ onSetIsModal, todoList, onSetToDo }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  function saveTodo() {}
+  function saveTodo() {
+    const newTodos = [
+      ...todoList,
+      {
+        id: todoList.length + 1,
+        title,
+        description,
+      },
+    ];
+    onSetToDo(newTodos);
+    onSetIsModal(false);
+  }
 
   return (
     <div
@@ -50,7 +61,7 @@ function CreateNewTodoForm({ onSetIsModal, todoList, onSetToDo }) {
         </div>
       </div>
       <button
-        onClick={() => onSetIsModal(false)}
+        onClick={saveTodo}
         className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded m-2"
       >
         Save
