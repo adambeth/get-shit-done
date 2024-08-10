@@ -1,12 +1,15 @@
 import "./App.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TodoList from "./TodoList";
 import TodoModal from "./TodoModal";
 import CreateNewTodoForm from "./CreateNewTodoForm";
 
 function App() {
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState(JSON.parse(localStorage.getItem("todos")));
   const [isModal, setIsModal] = useState(false);
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
   return (
     <>
       {" "}

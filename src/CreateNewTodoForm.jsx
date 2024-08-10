@@ -5,6 +5,7 @@ import { useState } from "react";
 function CreateNewTodoForm({ onSetIsModal, todoList, onSetToDo }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+
   function saveTodo() {
     const newTodos = [
       ...todoList,
