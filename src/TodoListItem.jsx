@@ -22,7 +22,7 @@ export default function TodoListItem({ todo, onClick }) {
         </label>
         <p
           id="title"
-          className="border-solid border-4 border-orange-500 rounded-lg p-5"
+          className="border-solid border-4 border-orange-500 rounded-lg p-5 text-ellipsis overflow-hidden"
         >
           {title}
         </p>
@@ -34,7 +34,7 @@ export default function TodoListItem({ todo, onClick }) {
         </label>
         <p
           id="details"
-          className="border-solid border-4 border-orange-500 rounded-lg p-5 m-0"
+          className="border-solid border-4 border-orange-500 rounded-lg p-5 text-ellipsis overflow-hidden line-clamp-2"
         >
           {description}
         </p>
