@@ -1,14 +1,28 @@
 import "./TodoListItem.css";
 import PropTypes from "prop-types";
 
-export default function TodoListItem({ todo, onClick }) {
+export default function TodoListItem({ todo, onClick, onSetTodos, todos, id }) {
   TodoListItem.propTypes = {
     todo: PropTypes.shape({
       title: PropTypes.string.isRequired,
       id: PropTypes.number.isRequired,
       description: PropTypes.string.isRequired,
-    }),
+    }).isRequired,
+    onClick: PropTypes.func.isRequired,
+    onSetTodos: PropTypes.func.isRequired,
+    todos: PropTypes.arrayOf(
+      PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        id: PropTypes.number.isRequired,
+        description: PropTypes.string.isRequired,
+      })
+    ).isRequired,
+    id: PropTypes.number.isRequired,
   };
+
+  function handleDeleteTodo() {
+    onSetTodos(todos.filter((todo) => todo.id != id));
+  }
   const { title, description } = { ...todo };
   return (
     <div
@@ -39,6 +53,15 @@ export default function TodoListItem({ todo, onClick }) {
           {description}
         </p>
       </div>
+      <button className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 w-full px-4 rounded m-2">
+        Mark As Done
+      </button>
+      <button
+        onClick={handleDeleteTodo}
+        className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 w-full px-4 rounded m-2"
+      >
+        Delete
+      </button>
     </div>
   );
 }

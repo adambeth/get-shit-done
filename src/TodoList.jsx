@@ -2,7 +2,7 @@ import TodoListItem from "./TodoListItem";
 import PropTypes from "prop-types";
 import { useState } from "react";
 
-export default function TodoList({ todos, onSetIsModal, isModal }) {
+export default function TodoList({ todos, onSetIsModal, isModal, onSetTodos }) {
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isNewTodo, setIsNewTodo] = useState(false);
   TodoList.propTypes = {
@@ -36,6 +36,9 @@ export default function TodoList({ todos, onSetIsModal, isModal }) {
             onClick={() => setIsEditOpen(!isEditOpen)}
             key={todo.id}
             todo={todo}
+            onSetTodos={onSetTodos}
+            todos={todos}
+            id={todo.id}
           />
         ))}
     </>
