@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+  margin: calc(4rem / 16);
+  /* margin-right: calc(4rem / 16); */
+  font-family: monospace, sans-serif;
+}
+html {
+  background-color: aquamarine;
+}
+/* .grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  border: 2px solid border;
+  grid-template-areas: "todolist todoform";
+}
+.todolist {
+  grid-area: todolist;
+  border: 0.5rem solid black;
+}
+.todo-form-details {
+  grid-area: todoform;
+  border: 0.5rem solid black;
+} */
