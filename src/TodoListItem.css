@@ -1,3 +1,7 @@
+* {
+  z-index: 1;
+}
+
 .label {
   position: relative;
   padding-left: calc(8rem / 16);
@@ -5,5 +9,4 @@
   top: calc(14rem / 16);
   left: calc(1rem / 16);
   background-color: #f1f5f9;
-  /* z-index: -1; */
 }
