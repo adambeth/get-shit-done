@@ -9,6 +9,7 @@ export default function TodoList({ todos, onSetIsModal, isModal, onSetTodos }) {
     todos: PropTypes.array.isRequired,
     onSetIsModal: PropTypes.func.isRequired,
     isModal: PropTypes.any.isRequired,
+    onSetTodos: PropTypes.func.isRequired,
   };
 
   function handleAddTodo() {
