@@ -6,11 +6,6 @@ function CreateNewTodoForm({ onSetIsModal, todoList, onSetToDo }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
-  CreateNewTodoForm.propTypes = {
-    onSetIsModal: PropTypes.func.isRequired,
-    todoList: PropTypes.array.isRequired,
-    onSetToDo: PropTypes.func.isRequired,
-  };
   function saveTodo() {
     const newTodos = [
       ...todoList,
@@ -85,3 +80,8 @@ function CreateNewTodoForm({ onSetIsModal, todoList, onSetToDo }) {
 }
 
 export default CreateNewTodoForm;
+CreateNewTodoForm.propTypes = {
+  onSetIsModal: PropTypes.func.isRequired,
+  todoList: PropTypes.array.isRequired,
+  onSetToDo: PropTypes.func.isRequired,
+};

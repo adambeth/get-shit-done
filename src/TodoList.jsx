@@ -5,12 +5,6 @@ import { useState } from "react";
 export default function TodoList({ todos, onSetIsModal, isModal, onSetTodos }) {
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isNewTodo, setIsNewTodo] = useState(false);
-  TodoList.propTypes = {
-    todos: PropTypes.array.isRequired,
-    onSetIsModal: PropTypes.func.isRequired,
-    isModal: PropTypes.any.isRequired,
-    onSetTodos: PropTypes.func.isRequired,
-  };
 
   function handleAddTodo() {
     setIsNewTodo(!isNewTodo); // not sure why im using this
@@ -45,3 +39,9 @@ export default function TodoList({ todos, onSetIsModal, isModal, onSetTodos }) {
     </>
   );
 }
+TodoList.propTypes = {
+  todos: PropTypes.array.isRequired,
+  onSetIsModal: PropTypes.func.isRequired,
+  isModal: PropTypes.any.isRequired,
+  onSetTodos: PropTypes.func.isRequired,
+};
