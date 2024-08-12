@@ -21,7 +21,7 @@ export default function TodoListItem({ todo, onClick, onSetTodos, todos, id }) {
   };
 
   function handleDeleteTodo() {
-    onSetTodos({ items: todos.filter((todo) => todo.id != id) });
+    onSetTodos(todos.filter((todo) => todo.id != id));
   }
   const { title, description } = { ...todo };
   return (
