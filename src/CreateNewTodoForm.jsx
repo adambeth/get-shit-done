@@ -12,14 +12,16 @@ function CreateNewTodoForm({ onSetIsModal, todoList, onSetToDo }) {
     onSetToDo: PropTypes.func.isRequired,
   };
   function saveTodo() {
-    const newTodos = [
-      ...todoList,
-      {
-        id: uuidv4(),
-        title,
-        description,
-      },
-    ];
+    const newTodos = {
+      items: [
+        ...todoList.items,
+        {
+          id: uuidv4(),
+          title,
+          description,
+        },
+      ],
+    };
     onSetToDo(newTodos);
     setTitle("");
     setDescription("");

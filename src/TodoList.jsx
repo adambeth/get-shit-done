@@ -26,19 +26,19 @@ export default function TodoList({ todos, onSetIsModal, isModal, onSetTodos }) {
           +
         </button>
       </div>
-      {todos.length === 0 && (
+      {todos.items.length === 0 && (
         <div>
           <h1>You do not have anything todo! Take a break</h1>
         </div>
       )}
       {todos &&
-        todos.map((todo) => (
+        todos.items.map((todo) => (
           <TodoListItem
             onClick={() => setIsEditOpen(!isEditOpen)}
             key={todo.id}
             todo={todo}
             onSetTodos={onSetTodos}
-            todos={todos}
+            todos={todos.items}
             id={todo.id}
           />
         ))}

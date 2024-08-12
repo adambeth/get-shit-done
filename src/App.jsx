@@ -3,17 +3,19 @@ import { useEffect, useState } from "react";
 import TodoList from "./TodoList";
 import TodoModal from "./TodoModal";
 import CreateNewTodoForm from "./CreateNewTodoForm";
+import todoData from "../todoData";
 
 function App() {
-  const [todos, setTodos] = useState(() => {
-    const savedTodos = localStorage.getItem("todos");
-    try {
-      return savedTodos ? JSON.parse(savedTodos) : [];
-    } catch (e) {
-      console.error("Failed to parse todos from localStorage", e);
-      return [];
-    }
-  });
+  const [todos, setTodos] = useState({ items: [...todoData.items] });
+  // const [todos, setTodos] = useState(() => {
+  //   const savedTodos = localStorage.getItem("todos");
+  //   try {
+  //     return savedTodos ? JSON.parse(savedTodos) : [];
+  //   } catch (e) {
+  //     console.error("Failed to parse todos from localStorage", e);
+  //     return [];
+  //   }
+  // });
   const [isModalOpen, setIsModal] = useState(false);
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
