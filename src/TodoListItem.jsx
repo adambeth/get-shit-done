@@ -2,24 +2,6 @@ import "./TodoListItem.css";
 import PropTypes from "prop-types";
 
 export default function TodoListItem({ todo, onClick, onSetTodos, todos, id }) {
-  TodoListItem.propTypes = {
-    todo: PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      id: PropTypes.number.isRequired,
-      description: PropTypes.string.isRequired,
-    }).isRequired,
-    onClick: PropTypes.func.isRequired,
-    onSetTodos: PropTypes.func.isRequired,
-    todos: PropTypes.arrayOf(
-      PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        id: PropTypes.number.isRequired,
-        description: PropTypes.string.isRequired,
-      })
-    ).isRequired,
-    id: PropTypes.number.isRequired,
-  };
-
   function handleDeleteTodo() {
     onSetTodos(todos.filter((todo) => todo.id != id));
   }
@@ -27,7 +9,7 @@ export default function TodoListItem({ todo, onClick, onSetTodos, todos, id }) {
   return (
     <div
       onClick={onClick}
-      className="border-solid border-4 border-orange-500 rounded-lg p-4 bg-slate-100 max-w-50"
+      className="border-solid border-4 border-orange-500 rounded-lg p-4 bg-slate-100 h-96"
     >
       <div>
         {" "}
@@ -65,3 +47,20 @@ export default function TodoListItem({ todo, onClick, onSetTodos, todos, id }) {
     </div>
   );
 }
+TodoListItem.propTypes = {
+  todo: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+    description: PropTypes.string.isRequired,
+  }).isRequired,
+  onClick: PropTypes.func.isRequired,
+  onSetTodos: PropTypes.func.isRequired,
+  todos: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      id: PropTypes.number.isRequired,
+      description: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  id: PropTypes.number.isRequired,
+};

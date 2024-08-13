@@ -1,31 +1,14 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
 
-function CreateNewTodoForm({ onSetIsModal, todoList, onSetToDo }) {
+function CreateNewTodoForm({ onSetIsModal, onSaveForm }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-
-  CreateNewTodoForm.propTypes = {
-    onSetIsModal: PropTypes.func.isRequired,
-    todoList: PropTypes.array.isRequired,
-    onSetToDo: PropTypes.func.isRequired,
-  };
-  function saveTodo() {
-    const newTodos = [
-      ...todoList,
-      {
-        id: uuidv4(),
-        title,
-        description,
-      },
-    ];
-    onSetToDo(newTodos);
+  function handleOnclickSave() {
+    onSaveForm(title, description);
     setTitle("");
     setDescription("");
-    onSetIsModal(false);
   }
-
   return (
     <div
       // onClick={onClick}
@@ -69,7 +52,7 @@ function CreateNewTodoForm({ onSetIsModal, todoList, onSetToDo }) {
         </div>
       </div>
       <button
-        onClick={saveTodo}
+        onClick={handleOnclickSave}
         className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded m-2"
       >
         Save
@@ -85,3 +68,8 @@ function CreateNewTodoForm({ onSetIsModal, todoList, onSetToDo }) {
 }
 
 export default CreateNewTodoForm;
+CreateNewTodoForm.propTypes = {
+  onSetIsModal: PropTypes.func.isRequired,
+  todoList: PropTypes.array.isRequired,
+  onSaveForm: PropTypes.func.isRequired,
+};
