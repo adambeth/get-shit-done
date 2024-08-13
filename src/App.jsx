@@ -5,10 +5,10 @@ import TodoModal from "./TodoModal";
 import TodoListItem from "./TodoListItem";
 import CreateNewTodoForm from "./CreateNewTodoForm";
 import { v4 as uuidv4 } from "uuid";
-
+//react context
 function App() {
   const [isModalOpen, setIsModal] = useState(false);
-  // const [selectedId, setSelectedId] = useState("");
+  const [selectedTodoTask, setSelectedTodo] = useState({});
   const [todos, setTodos] = useState(() => {
     const savedTodos = localStorage.getItem("todos");
     try {
@@ -22,6 +22,7 @@ function App() {
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
+
   function handleModal() {
     setIsModal(!isModalOpen);
   }
@@ -29,7 +30,9 @@ function App() {
     e.stopPropagation();
     setTodos(todos.filter((todo) => todo.id != id));
   }
-  function handleAddTodo() {
+  function handleAddTodo(id) {
+    const selectedItem = todos.filter((todo) => todo.id == id);
+    setSelectedTodo(selectedItem[0]);
     handleModal();
   }
   function handleSaveTodo(title, description) {
@@ -46,15 +49,14 @@ function App() {
   }
   return (
     <>
-      {" "}
       {isModalOpen && (
         <TodoModal>
-          {" "}
           <CreateNewTodoForm
             onSetIsModal={handleModal}
-            todoList={todos}
             onSetToDo={setTodos}
             onSaveForm={handleSaveTodo}
+            selectedTodoTask={selectedTodoTask}
+            onSetSelectTodo={setSelectedTodo}
           />
         </TodoModal>
       )}
@@ -69,12 +71,9 @@ function App() {
             {todos &&
               todos.map((todo) => (
                 <TodoListItem
-                  onClick={handleAddTodo}
+                  onClick={() => handleAddTodo(todo.id)}
                   key={todo.id}
                   todo={todo}
-                  onSetTodos={setTodos}
-                  todos={todos}
-                  id={todo.id}
                   onDeleteTodo={(e) => handleDeleteTodo(e, todo.id)}
                 />
               ))}

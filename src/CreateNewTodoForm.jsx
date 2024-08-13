@@ -1,13 +1,25 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
 
-function CreateNewTodoForm({ onSetIsModal, onSaveForm }) {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+function CreateNewTodoForm({
+  onSetIsModal,
+  onSaveForm,
+  selectedTodoTask,
+  onSetSelectTodo,
+}) {
+  const [description, setDescription] = useState(() => {
+    return selectedTodoTask?.description ?? "";
+  });
+
+  const [title, setTitle] = useState(() => {
+    return selectedTodoTask?.title ?? "";
+  });
+
   function handleOnclickSave() {
     onSaveForm(title, description);
     setTitle("");
     setDescription("");
+    onSetSelectTodo({});
   }
   return (
     <div
@@ -29,7 +41,9 @@ function CreateNewTodoForm({ onSetIsModal, onSaveForm }) {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             className="border-solid border-4 border-orange-500 rounded-lg p-5 w-full"
-          ></input>
+          >
+            {/* {title} */}
+          </input>
         </div>
       </div>
 
@@ -48,7 +62,9 @@ function CreateNewTodoForm({ onSetIsModal, onSaveForm }) {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             className="border-solid border-4 border-orange-500 rounded-lg p-5 w-full h-34"
-          ></textarea>
+          >
+            {/* {description} */}
+          </textarea>
         </div>
       </div>
       <button
@@ -58,7 +74,10 @@ function CreateNewTodoForm({ onSetIsModal, onSaveForm }) {
         Save
       </button>
       <button
-        onClick={() => onSetIsModal(false)}
+        onClick={() => {
+          onSetSelectTodo({});
+          onSetIsModal(false);
+        }}
         className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded m-2"
       >
         Close
@@ -72,4 +91,5 @@ CreateNewTodoForm.propTypes = {
   onSetIsModal: PropTypes.func.isRequired,
   todoList: PropTypes.array.isRequired,
   onSaveForm: PropTypes.func.isRequired,
+  selectedTodoTasks: PropTypes.object.isRequired,
 };
