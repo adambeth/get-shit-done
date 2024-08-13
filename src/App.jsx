@@ -2,11 +2,13 @@ import "./App.css";
 import { useEffect, useState } from "react";
 import TodoList from "./TodoList";
 import TodoModal from "./TodoModal";
+import TodoListItem from "./TodoListItem";
 import CreateNewTodoForm from "./CreateNewTodoForm";
 import { v4 as uuidv4 } from "uuid";
-
+//react context
 function App() {
   const [isModalOpen, setIsModal] = useState(false);
+  const [selectedTodoTask, setSelectedTodo] = useState({});
   const [todos, setTodos] = useState(() => {
     const savedTodos = localStorage.getItem("todos");
     try {
@@ -21,6 +23,18 @@ function App() {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
 
+  function handleModal() {
+    setIsModal(!isModalOpen);
+  }
+  function handleDeleteTodo(e, id) {
+    e.stopPropagation();
+    setTodos(todos.filter((todo) => todo.id != id));
+  }
+  function handleAddTodo(id) {
+    const selectedItem = todos.filter((todo) => todo.id == id);
+    setSelectedTodo(selectedItem[0]);
+    handleModal();
+  }
   function handleSaveTodo(title, description) {
     const newTodos = [
       ...todos,
@@ -35,26 +49,35 @@ function App() {
   }
   return (
     <>
-      {" "}
       {isModalOpen && (
         <TodoModal>
-          {" "}
           <CreateNewTodoForm
-            onSetIsModal={setIsModal}
-            todoList={todos}
+            onSetIsModal={handleModal}
             onSetToDo={setTodos}
             onSaveForm={handleSaveTodo}
+            selectedTodoTask={selectedTodoTask}
+            onSetSelectTodo={setSelectedTodo}
           />
         </TodoModal>
       )}
       {!isModalOpen && (
         <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 bg-red-100 rounded-lg p-4">
-          <TodoList
-            todos={todos}
-            onSetIsModal={setIsModal}
-            isModal={isModalOpen}
-            onSetTodos={setTodos}
-          />
+          <TodoList onSetIsModal={handleModal}>
+            {todos.length === 0 && (
+              <div className="flex align-center">
+                <h1>You do not have anything todo! Take a break</h1>
+              </div>
+            )}
+            {todos &&
+              todos.map((todo) => (
+                <TodoListItem
+                  onClick={() => handleAddTodo(todo.id)}
+                  key={todo.id}
+                  todo={todo}
+                  onDeleteTodo={(e) => handleDeleteTodo(e, todo.id)}
+                />
+              ))}
+          </TodoList>
         </div>
       )}
     </>

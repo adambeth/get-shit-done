@@ -10,6 +10,5 @@ function TodoModal({ children }) {
 
 export default TodoModal;
 TodoModal.propTypes = {
-  onSetIsModal: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired,
 };
