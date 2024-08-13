@@ -9,7 +9,7 @@ export default function TodoListItem({ todo, onClick, onSetTodos, todos, id }) {
   return (
     <div
       onClick={onClick}
-      className="border-solid border-4 border-orange-500 rounded-lg p-4 bg-slate-100 max-w-50"
+      className="border-solid border-4 border-orange-500 rounded-lg p-4 bg-slate-100 h-96"
     >
       <div>
         {" "}
