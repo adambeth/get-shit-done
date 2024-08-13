@@ -1,14 +1,10 @@
 import TodoListItem from "./TodoListItem";
 import PropTypes from "prop-types";
-import { useState } from "react";
 
-export default function TodoList({ todos, onSetIsModal, isModal, onSetTodos }) {
-  const [isEditOpen, setIsEditOpen] = useState(false);
-  const [isNewTodo, setIsNewTodo] = useState(false);
-
+export default function TodoList({ todos, onSetIsModal, onSetTodos }) {
   function handleAddTodo() {
-    setIsNewTodo(!isNewTodo); // not sure why im using this
-    onSetIsModal(!isModal);
+    console.log("Hello");
+    onSetIsModal();
   }
   return (
     <>
@@ -29,7 +25,7 @@ export default function TodoList({ todos, onSetIsModal, isModal, onSetTodos }) {
       {todos &&
         todos.map((todo) => (
           <TodoListItem
-            onClick={() => setIsEditOpen(!isEditOpen)}
+            onClick={handleAddTodo}
             key={todo.id}
             todo={todo}
             onSetTodos={onSetTodos}

@@ -7,6 +7,11 @@ import { v4 as uuidv4 } from "uuid";
 
 function App() {
   const [isModalOpen, setIsModal] = useState(false);
+  const [selectedId, setSelectedId] = useState("");
+
+  function handleModal() {
+    setIsModal(!isModalOpen);
+  }
   const [todos, setTodos] = useState(() => {
     const savedTodos = localStorage.getItem("todos");
     try {
@@ -40,7 +45,7 @@ function App() {
         <TodoModal>
           {" "}
           <CreateNewTodoForm
-            onSetIsModal={setIsModal}
+            onSetIsModal={handleModal}
             todoList={todos}
             onSetToDo={setTodos}
             onSaveForm={handleSaveTodo}
@@ -51,7 +56,7 @@ function App() {
         <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 bg-red-100 rounded-lg p-4">
           <TodoList
             todos={todos}
-            onSetIsModal={setIsModal}
+            onSetIsModal={handleModal}
             isModal={isModalOpen}
             onSetTodos={setTodos}
           />

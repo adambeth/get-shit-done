@@ -50,7 +50,7 @@ export default function TodoListItem({ todo, onClick, onSetTodos, todos, id }) {
 TodoListItem.propTypes = {
   todo: PropTypes.shape({
     title: PropTypes.string.isRequired,
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
   }).isRequired,
   onClick: PropTypes.func.isRequired,
@@ -58,9 +58,9 @@ TodoListItem.propTypes = {
   todos: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string.isRequired,
-      id: PropTypes.number.isRequired,
+      id: PropTypes.string,
       description: PropTypes.string.isRequired,
     })
   ).isRequired,
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
 };
