@@ -1,11 +1,9 @@
 import "./TodoListItem.css";
 import PropTypes from "prop-types";
 
-export default function TodoListItem({ todo, onClick, onSetTodos, todos, id }) {
-  function handleDeleteTodo() {
-    onSetTodos(todos.filter((todo) => todo.id != id));
-  }
+export default function TodoListItem({ todo, onClick, onDeleteTodo }) {
   const { title, description } = { ...todo };
+
   return (
     <div
       onClick={onClick}
@@ -39,7 +37,7 @@ export default function TodoListItem({ todo, onClick, onSetTodos, todos, id }) {
         Mark As Done
       </button>
       <button
-        onClick={handleDeleteTodo}
+        onClick={onDeleteTodo}
         className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 w-full px-4 rounded m-2"
       >
         Delete
@@ -54,6 +52,7 @@ TodoListItem.propTypes = {
     description: PropTypes.string.isRequired,
   }).isRequired,
   onClick: PropTypes.func.isRequired,
+  onDeleteTodo: PropTypes.func.isRequired,
   onSetTodos: PropTypes.func.isRequired,
   todos: PropTypes.arrayOf(
     PropTypes.shape({

@@ -2,16 +2,13 @@ import "./App.css";
 import { useEffect, useState } from "react";
 import TodoList from "./TodoList";
 import TodoModal from "./TodoModal";
+import TodoListItem from "./TodoListItem";
 import CreateNewTodoForm from "./CreateNewTodoForm";
 import { v4 as uuidv4 } from "uuid";
 
 function App() {
   const [isModalOpen, setIsModal] = useState(false);
-  const [selectedId, setSelectedId] = useState("");
-
-  function handleModal() {
-    setIsModal(!isModalOpen);
-  }
+  // const [selectedId, setSelectedId] = useState("");
   const [todos, setTodos] = useState(() => {
     const savedTodos = localStorage.getItem("todos");
     try {
@@ -25,7 +22,16 @@ function App() {
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
-
+  function handleModal() {
+    setIsModal(!isModalOpen);
+  }
+  function handleDeleteTodo(e, id) {
+    e.stopPropagation();
+    setTodos(todos.filter((todo) => todo.id != id));
+  }
+  function handleAddTodo() {
+    handleModal();
+  }
   function handleSaveTodo(title, description) {
     const newTodos = [
       ...todos,
@@ -54,12 +60,25 @@ function App() {
       )}
       {!isModalOpen && (
         <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 bg-red-100 rounded-lg p-4">
-          <TodoList
-            todos={todos}
-            onSetIsModal={handleModal}
-            isModal={isModalOpen}
-            onSetTodos={setTodos}
-          />
+          <TodoList onSetIsModal={handleModal}>
+            {todos.length === 0 && (
+              <div className="flex align-center">
+                <h1>You do not have anything todo! Take a break</h1>
+              </div>
+            )}
+            {todos &&
+              todos.map((todo) => (
+                <TodoListItem
+                  onClick={handleAddTodo}
+                  key={todo.id}
+                  todo={todo}
+                  onSetTodos={setTodos}
+                  todos={todos}
+                  id={todo.id}
+                  onDeleteTodo={(e) => handleDeleteTodo(e, todo.id)}
+                />
+              ))}
+          </TodoList>
         </div>
       )}
     </>
