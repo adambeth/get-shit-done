@@ -1,8 +1,13 @@
+import { FC } from 'react';
 import "./TodoListItem.css";
-import PropTypes from "prop-types";
 
-export default function TodoListItem({ todo, onClick, onDeleteTodo }) {
-  const { title, description } = { ...todo };
+export type Props={
+  todo:object,
+  onClick: () => void,
+  onDeleteTodo: (e:React.MouseEvent<HTMLButtonElement>) => void
+}
+const TodoListItem: FC<Props> = ({ todo, onClick, onDeleteTodo })=> {
+  const { title = "", description = "" } = { ...todo }
 
   return (
     <div
@@ -45,21 +50,5 @@ export default function TodoListItem({ todo, onClick, onDeleteTodo }) {
     </div>
   );
 }
-TodoListItem.propTypes = {
-  todo: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-  }).isRequired,
-  onClick: PropTypes.func.isRequired,
-  onDeleteTodo: PropTypes.func.isRequired,
-  onSetTodos: PropTypes.func.isRequired,
-  todos: PropTypes.arrayOf(
-    PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      id: PropTypes.string,
-      description: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-  id: PropTypes.string.isRequired,
-};
+
+export default TodoListItem

@@ -5,14 +5,20 @@ import TodoModal from "./TodoModal";
 import TodoListItem from "./TodoListItem";
 import CreateNewTodoForm from "./CreateNewTodoForm";
 import { v4 as uuidv4 } from "uuid";
+
+export type Todo ={
+  id:string,
+  title:string,
+  description:string
+}
 //react context
 function App() {
   const [isModalOpen, setIsModal] = useState(false);
-  const [selectedTodoTask, setSelectedTodo] = useState({});
-  const [todos, setTodos] = useState(() => {
+  const [selectedTodoTask, setSelectedTodo] = useState<Todo | object>({});
+  const [todos, setTodos] = useState<Todo[]>(() => {
     const savedTodos = localStorage.getItem("todos");
     try {
-      return savedTodos ? JSON.parse(savedTodos) : { items: [] };
+      return savedTodos ? JSON.parse(savedTodos) : [];
     } catch (e) {
       console.error("Failed to parse todos from localStorage", e);
       return [];
@@ -26,16 +32,16 @@ function App() {
   function handleModal() {
     setIsModal(!isModalOpen);
   }
-  function handleDeleteTodo(e, id) {
+  function handleDeleteTodo(e: React.MouseEvent<HTMLButtonElement>, id: string) {
     e.stopPropagation();
-    setTodos(todos.filter((todo) => todo.id != id));
+    setTodos(todos.filter((todo:Todo) => todo.id != id));
   }
-  function handleAddTodo(id) {
-    const selectedItem = todos.filter((todo) => todo.id == id);
+  function handleAddTodo(id:string) {
+    const selectedItem = todos.filter((todo:Todo) => todo.id == id);
     setSelectedTodo(selectedItem[0]);
     handleModal();
   }
-  function handleSaveTodo(title, description) {
+  function handleSaveTodo(title:string, description:string) {
     const newTodos = [
       ...todos,
       {
@@ -53,10 +59,9 @@ function App() {
         <TodoModal>
           <CreateNewTodoForm
             onSetIsModal={handleModal}
-            onSetToDo={setTodos}
             onSaveForm={handleSaveTodo}
-            selectedTodoTask={selectedTodoTask}
             onSetSelectTodo={setSelectedTodo}
+            selectedTodoTask={selectedTodoTask}
           />
         </TodoModal>
       )}
@@ -69,7 +74,7 @@ function App() {
               </div>
             )}
             {todos &&
-              todos.map((todo) => (
+              todos.map((todo:Todo) => (
                 <TodoListItem
                   onClick={() => handleAddTodo(todo.id)}
                   key={todo.id}

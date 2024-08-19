@@ -1,18 +1,34 @@
-import PropTypes from "prop-types";
-import { useState } from "react";
+/* eslint-disable @typescript-eslint/no-empty-object-type */
+ 
 
-function CreateNewTodoForm({
+import { useState, FC } from "react";
+type Todo = {
+  id: string;
+  title: string;
+  description: string;
+}| {title:string,description:string};
+
+export type Props = {
+  onSetIsModal: (isModal: boolean)=> void,
+  onSaveForm: (title:string,description:string)=> void,
+   
+  selectedTodoTask: Todo| object,
+   
+  onSetSelectTodo: (todo:Todo | {})=> void,
+}
+
+const CreateNewTodoForm:FC<Props>=({
   onSetIsModal,
   onSaveForm,
   selectedTodoTask,
   onSetSelectTodo,
-}) {
+}) =>{
   const [description, setDescription] = useState(() => {
-    return selectedTodoTask?.description ?? "";
+    return (selectedTodoTask as Todo)?.description ?? "";
   });
 
   const [title, setTitle] = useState(() => {
-    return selectedTodoTask?.title ?? "";
+    return (selectedTodoTask as Todo)?.title ?? "";
   });
 
   function handleOnclickSave() {
@@ -87,9 +103,3 @@ function CreateNewTodoForm({
 }
 
 export default CreateNewTodoForm;
-CreateNewTodoForm.propTypes = {
-  onSetIsModal: PropTypes.func.isRequired,
-  todoList: PropTypes.array.isRequired,
-  onSaveForm: PropTypes.func.isRequired,
-  selectedTodoTasks: PropTypes.object.isRequired,
-};
