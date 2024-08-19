@@ -4,7 +4,7 @@ import TodoList from "./TodoList";
 import TodoModal from "./TodoModal";
 import TodoListItem from "./TodoListItem";
 import CreateNewTodoForm from "./CreateNewTodoForm";
-import { v4 as uuidv4 } from "uuid";
+import { nanoid } from 'nanoid'
 
 export type Todo ={
   id:string,
@@ -45,7 +45,7 @@ function App() {
     const newTodos = [
       ...todos,
       {
-        id: uuidv4(),
+        id: nanoid(),
         title,
         description,
       },
