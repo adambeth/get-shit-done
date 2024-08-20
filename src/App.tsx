@@ -10,6 +10,7 @@ export type Todo ={
   id:string,
   title:string,
   description:string
+  isComplete:boolean
 }
 //react context
 function App() {
@@ -41,6 +42,12 @@ function App() {
     setSelectedTodo(selectedItem[0]);
     handleModal();
   }
+  function handleMarkAsDone(e: React.MouseEvent<HTMLUnknownElement>,id:string){
+      e.stopPropagation();
+      setTodos(todos.map((todo:Todo)=>
+        todo.id ==id ? {...todo, isComplete:!todo.isComplete}: todo
+      ))
+  }
   function handleSaveTodo(title:string, description:string) {
     const newTodos = [
       ...todos,
@@ -48,6 +55,7 @@ function App() {
         id: nanoid(),
         title,
         description,
+        isComplete:false,
       },
     ];
     setTodos(newTodos);
@@ -80,6 +88,7 @@ function App() {
                   key={todo.id}
                   todo={todo}
                   onDeleteTodo={(e) => handleDeleteTodo(e, todo.id)}
+                  onHandleMarkAsDone={(e)=>handleMarkAsDone(e,todo.id)}
                 />
               ))}
           </TodoList>
