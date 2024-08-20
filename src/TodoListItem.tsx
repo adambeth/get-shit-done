@@ -5,8 +5,9 @@ export type Props={
   todo:object,
   onClick: () => void,
   onDeleteTodo: (e:React.MouseEvent<HTMLButtonElement>) => void
+  onHandleMarkAsDone:(e:React.MouseEvent<HTMLButtonElement>)=> void
 }
-const TodoListItem: FC<Props> = ({ todo, onClick, onDeleteTodo })=> {
+const TodoListItem: FC<Props> = ({ todo, onClick, onDeleteTodo,onHandleMarkAsDone })=> {
   const { title = "", description = "" } = { ...todo }
 
   return (
@@ -38,7 +39,7 @@ const TodoListItem: FC<Props> = ({ todo, onClick, onDeleteTodo })=> {
           {description}
         </p>
       </div>
-      <button className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 w-full px-4 rounded m-2">
+      <button onClick={onHandleMarkAsDone} className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 w-full px-4 rounded m-2">
         Mark As Done
       </button>
       <button
