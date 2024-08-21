@@ -45,10 +45,11 @@ function App() {
   function handleMarkAsDone(e: React.MouseEvent<HTMLUnknownElement>,id:string){
       e.stopPropagation();
       setTodos(todos.map((todo:Todo)=>
-        todo.id ==id ? {...todo, isComplete:!todo.isComplete}: todo
+        todo.id ==id ? {...todo, isComplete: !todo.isComplete}: todo
       ))
   }
   function handleSaveTodo(title:string, description:string) {
+    debugger;
     const newTodos = [
       ...todos,
       {

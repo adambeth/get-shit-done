@@ -14,7 +14,7 @@ const TodoListItem: FC<Props> = ({ todo, onClick, onDeleteTodo,onHandleMarkAsDon
   return (
     <div
       onClick={onClick}
-      className={`border-solid border-4 ${todo.isComplete ? `border-orange-500`:`border-gray-500 bg-slate-700` } rounded-lg p-4 bg-slate-100 h-96`}
+      className={`border-solid border-4 ${!todo.isComplete ? `border-orange-500`:`border-gray-500 bg-slate-700` } rounded-lg p-4 bg-slate-100 h-96`}
     >
       <div>
         {" "}
@@ -41,7 +41,7 @@ const TodoListItem: FC<Props> = ({ todo, onClick, onDeleteTodo,onHandleMarkAsDon
         </p>
       </div>
       <button onClick={onHandleMarkAsDone} className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 w-full px-4 rounded m-2">{
-        `${todo.isComplete ? "Mark As Done":"Re-Open" }`  
+        `${todo.isComplete ?"Re-Open" : "Mark As Done"}`  
         }
         
       </button>
