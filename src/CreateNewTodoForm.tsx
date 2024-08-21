@@ -10,10 +10,8 @@ type Todo = {
 
 export type Props = {
   onSetIsModal: (isModal: boolean)=> void,
-  onSaveForm: (title:string,description:string)=> void,
-   
+  onSaveForm: (todo:Todo,title:string,description:string)=> void,
   selectedTodoTask: Todo| object,
-   
   onSetSelectTodo: (todo:Todo | {})=> void,
 }
 
@@ -32,7 +30,7 @@ const CreateNewTodoForm:FC<Props>=({
   });
 
   function handleOnclickSave() {
-    onSaveForm(title, description);
+    onSaveForm(selectedTodoTask as Todo,title, description);
     setTitle("");
     setDescription("");
     onSetSelectTodo({});
