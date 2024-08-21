@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-object-type */
 import "./App.css";
 import { useEffect, useState } from "react";
 import TodoList from "./TodoList";
@@ -42,24 +43,30 @@ function App() {
     setSelectedTodo(selectedItem[0]);
     handleModal();
   }
+ 
   function handleMarkAsDone(e: React.MouseEvent<HTMLUnknownElement>,id:string){
       e.stopPropagation();
       setTodos(todos.map((todo:Todo)=>
         todo.id ==id ? {...todo, isComplete: !todo.isComplete}: todo
       ))
   }
-  function handleSaveTodo(title:string, description:string) {
-    debugger;
-    const newTodos = [
-      ...todos,
-      {
-        id: nanoid(),
-        title,
-        description,
-        isComplete:false,
-      },
-    ];
-    setTodos(newTodos);
+  function handleSaveTodo(selectedTodo:Todo | {}, title:string, description:string) {
+    if(Object.keys(selectedTodo).length==0){
+      const newTodos = [
+        ...todos,
+        {
+          id: nanoid(),
+          title,
+          description,
+          isComplete:false,
+        },
+      ];
+      setTodos(newTodos);
+    }else {
+      setTodos(todos.map((todo:Todo)=>
+        todo.id ===(selectedTodo as Todo).id ? {...todo, title:title, description:description}: todo
+      ))
+    }
     setIsModal(false);
   }
   return (
@@ -70,7 +77,7 @@ function App() {
             onSetIsModal={handleModal}
             onSaveForm={handleSaveTodo}
             onSetSelectTodo={setSelectedTodo}
-            selectedTodoTask={selectedTodoTask}
+            selectedTodoTask={selectedTodoTask || {}}
           />
         </TodoModal>
       )}
