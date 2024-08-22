@@ -11,9 +11,9 @@ import SignIn from "./SignIn";
   
   const routes = createRoutesFromElements(
     <Route path="/" element={<App />}>
-      <Route path="/get-shit-done/" element={<Home />} />
+      <Route path="/home/" element={<Home />} />
       <Route index element={<Home/>} />
-      <Route path="get-shit-done/auth/" element={<SignIn />} />
+      <Route path="/auth/" element={<SignIn />} />
     </Route>
   );
   const router = createBrowserRouter(routes);
