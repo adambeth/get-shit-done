@@ -13,7 +13,7 @@ import SignIn from "./SignIn";
     <Route path="/" element={<App />}>
       <Route path="/get-shit-done" element={<Home />} />
       <Route index element={<></>} />
-      <Route path="/auth" element={<SignIn />} />
+      <Route path="get-shit-done/auth" element={<SignIn />} />
     </Route>
   );
   const router = createBrowserRouter(routes);
