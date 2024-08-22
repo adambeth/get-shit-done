@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import "./TodoListItem.css";
-import { Todo } from './App';
+import { Todo } from './routes/Home';
 
 export type Props={
   todo:Todo,
