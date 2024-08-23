@@ -6,6 +6,7 @@ import TodoModal from "../TodoModal";
 import TodoListItem from "../TodoListItem";
 import CreateNewTodoForm from "../CreateNewTodoForm";
 import { nanoid } from 'nanoid'
+import { Link } from "react-router-dom";
 
 export type Todo ={
   id:string,
@@ -71,6 +72,7 @@ function App() {
   }
   return (
     <>
+    <Link to="/get-shit-done/auth">Sign In</Link>
       {isModalOpen && (
         <TodoModal>
           <CreateNewTodoForm
